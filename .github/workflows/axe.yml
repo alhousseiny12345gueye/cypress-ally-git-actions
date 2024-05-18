@@ -21,7 +21,5 @@ jobs:
             npm start &
             npx wait-on http://localhost:3000
           fi
-      - name: Run axe
-        run: |
           npm install -g @axe-core/cli
           axe http://localhost:3000 --exit
