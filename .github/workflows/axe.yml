@@ -20,7 +20,7 @@ jobs:
           if ! curl -s http://localhost:3000 > /dev/null; then
             npm start &
             npx wait-on http://localhost:3000 &
-            npm install -g @axe-core/cli &
+            npm install -g @axe-core/cli 
             axe http://localhost:3000 --exit
           fi
           npm install -g @axe-core/cli
