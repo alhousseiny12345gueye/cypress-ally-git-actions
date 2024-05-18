@@ -14,10 +14,14 @@ jobs:
         with:
           node-version: 18.x
       - run: npm install
-      - run: npm install -g start-server-and-test
       - run: npm run build --if-present
-      - name: Start server and run tests
+      - name: Start server if not running
         run: |
-          npm start & start-server-and-test http://localhost:3000
+          if ! curl -s http://localhost:3000 > /dev/null; then
+            npm start &
+            npx wait-on http://localhost:3000
+          fi
+      - name: Run axe
+        run: |
           npm install -g @axe-core/cli
           axe http://localhost:3000 --exit
