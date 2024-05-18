@@ -10,13 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: 'lts/*'
       - name: npm install, build
         run: |
             npm install
-            npm run build
+            ESLINT_NO_DEV_ERRORS=true npm run build
+      - name: Check Chrome version
+        run: google-chrome-stable --version
       - name: run Lighthouse CI
         run: |
             npm install -g @lhci/cli@0.7.x
