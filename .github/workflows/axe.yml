@@ -13,11 +13,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 18.x
-      - run: npm install # replace npm ci with npm install
+      - run: npm install
+      - run: npm install -g start-server-and-test
       - run: npm run build --if-present
-      - run: npm start 
-      - run: sleep 10
-      - name: Run axe
+      - name: Start server and run tests
         run: |
+          npm start & start-server-and-test http://localhost:3000
           npm install -g @axe-core/cli
           axe http://localhost:3000 --exit
