@@ -16,6 +16,8 @@ jobs:
       - run: npm install
       - run: npm run build --if-present
       - name: Start server if not running
+        env:
+         ESLINT_NO_DEV_ERRORS: 'true'
         run: |
           if ! curl -s http://localhost:3000 > /dev/null; then
             npm start &
