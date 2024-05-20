@@ -14,17 +14,18 @@ jobs:
         with:
           node-version: 'lts/*'
       - run: npm install
-      - name: Build
-        env:
-          ESLINT_NO_DEV_ERRORS: 'true'
-        run: npm run build --if-present
-      - name: Start server if not running axe
+      - run: npm run build --if-present
+      - name: Check server and run axe
         run: |
+          npm install -g @axe-core/cli
           if ! curl -s http://localhost:3000 > /dev/null; then
             npm start &
-            npx wait-on http://localhost:3000 &
-            npm install -g @axe-core/cli 
-            axe http://localhost:3000 --exit
+            npx wait-on http://localhost:3000
           fi
-          npm install -g @axe-core/cli
           axe http://localhost:3000 --exit
+      - name: Archive axe accessibility report as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: axe accessibility report 
+          path: |
+              public/a11y_reports
