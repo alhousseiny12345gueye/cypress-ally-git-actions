@@ -27,7 +27,7 @@ jobs:
             npx wait-on http://localhost:3000
           fi
           axe http://localhost:3000 --dir public/a11y_reports --save axe_a11y_report.json
-          npx axe-html-reporter -s public/a11y_reports/axe_a11y_report.json -o public/a11y_reports/axe_a11y_report.html
+          node ./create-report.js
       - name: Archive axe accessibility report as an artifact
         uses: actions/upload-artifact@v4
         if: always()
