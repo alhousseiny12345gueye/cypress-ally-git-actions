@@ -1,9 +1,9 @@
 name: pa11y
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_run:
+    workflows: ["axe"]
+    types: 
+      - completed
 jobs:
   pa11y:
     runs-on: ubuntu-latest
