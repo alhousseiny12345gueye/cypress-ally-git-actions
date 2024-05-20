@@ -24,7 +24,7 @@ jobs:
             npm start &
             npx wait-on http://localhost:3000 &
             npm install -g pa11y
-            pa11y http://localhost:3000 --exit
+            pa11y http://localhost:3000 
           fi
           npm install -g pa11y
-          pa11y http://localhost:3000 --exit
+          pa11y http://localhost:3000 
