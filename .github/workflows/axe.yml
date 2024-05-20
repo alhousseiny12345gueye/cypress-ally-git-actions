@@ -10,23 +10,27 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v2
         with:
           node-version: 'lts/*'
       - run: npm install
       - name: Build
+        env:
+          ESLINT_NO_DEV_ERRORS: 'true'
         run: npm run build --if-present
       - name: Check server and run axe
         run: |
-          npm install -g @axe-core/cli axe-reports
+          npm install -g @axe-core/cli
+          npm install axe-reports@0.3.2
           if ! curl -s http://localhost:3000 > /dev/null; then
             npm start &
             npx wait-on http://localhost:3000
           fi
           axe http://localhost:3000 --dir public/a11y_reports --save axe_a11y_report.json
-          axe-reports -d public/a11y_reports/axe_a11y_report.json -o public/a11y_reports/axe_a11y_report.html
+          npx axe-reports -s public/a11y_reports/axe_a11y_report.json -o public/a11y_reports/axe_a11y_report.html
       - name: Archive axe accessibility report as an artifact
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: axe accessibility report 
           path: public/a11y_reports/axe_a11y_report.html
