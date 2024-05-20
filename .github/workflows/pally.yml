@@ -22,6 +22,7 @@ jobs:
             npm start &
             npx wait-on http://localhost:3000
           fi
+          mkdir -p public/a11y_reports
           npm install -g pa11y pa11y-reporter-html
           pa11y http://localhost:3000 --reporter html > public/a11y_reports/pally_a11y_report.html
       - name: Archive pally accessibility report as an artifact
