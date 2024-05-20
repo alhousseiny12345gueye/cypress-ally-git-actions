@@ -20,14 +20,21 @@ jobs:
         run: npm run build --if-present
       - name: Check server and run axe
         run: |
+          echo 'Creating reports directory'
           mkdir -p public/a11y_reports
+          echo 'Installing packages'
           npm install -g @axe-core/cli
           npm install axe-html-reporter
           if ! curl -s http://localhost:3000 > /dev/null; then
+            echo 'Starting server'
             npm start &
             npx wait-on http://localhost:3000
           fi
+          echo 'Running axe'
           axe http://localhost:3000 --dir public/a11y_reports --save axe_a11y_report.json
+          echo 'Stopping server'
+          pkill -f "react-scripts start"
+          echo 'Running create-report.js script'
           node create-report.js
       - name: Archive axe accessibility report as an artifact
         uses: actions/upload-artifact@v4
