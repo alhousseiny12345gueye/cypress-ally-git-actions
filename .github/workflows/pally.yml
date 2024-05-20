@@ -15,23 +15,19 @@ jobs:
           node-version: 'lts/*'
       - run: npm install
       - name: Build
-        env:
-          ESLINT_NO_DEV_ERRORS: 'true'
         run: npm run build --if-present
       - name: Start server if not running then run pa11y
-        continue-on-error: true
         run: |
           if ! curl -s http://localhost:3000 > /dev/null; then
             npm start &
-            npx wait-on http://localhost:3000 &
-            npm install -g pa11y
-            pa11y http://localhost:3000 
+            npx wait-on http://localhost:3000
           fi
-          npm install -g pa11y
-          pa11y http://localhost:3000 
+          npm install -g pa11y pa11y-reporter-html
+          pa11y http://localhost:3000 --reporter html > public/a11y_reports/pally_a11y_report.html
       - name: Archive pally accessibility report as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: pally accessibility report 
-          path: 
-                public/a11y_reports
+          path: public/a11y_reports/pally_a11y_report.html
+      - name: Fail if accessibility issues were found
+        run: grep -q "0 Errors" public/a11y_reports/pally_a11y_report.html || exit 1
