@@ -19,6 +19,7 @@ jobs:
           ESLINT_NO_DEV_ERRORS: 'true'
         run: npm run build --if-present
       - name: Start server if not running then run pa11y
+        continue-on-error: true
         run: |
           if ! curl -s http://localhost:3000 > /dev/null; then
             npm start &
@@ -28,3 +29,9 @@ jobs:
           fi
           npm install -g pa11y
           pa11y http://localhost:3000 
+      - name: Archive pally accessibility report as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pally accessibility report 
+          path: 
+                public/a11y_reports

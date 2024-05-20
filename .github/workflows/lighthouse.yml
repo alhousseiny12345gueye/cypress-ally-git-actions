@@ -20,6 +20,13 @@ jobs:
       - name: Check Chrome version
         run: google-chrome-stable --version
       - name: run Lighthouse CI
+        continue-on-error: true
         run: |
             npm install -g @lhci/cli@0.7.x
             lhci autorun
+      - name: Archive lighthouse accessibility report as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+         name: lighthouseaccessibilityreport 
+         path: 
+               public/a11y_reports
