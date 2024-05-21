@@ -1,11 +1,10 @@
-// Import required modules
 const { writeFileSync } = require('fs');
 const { createHtmlReport } = require('axe-html-reporter');
 
 console.log('Modules imported successfully');
 
-// Load axe results from JSON file
-const results = require('./public/a11y_reports/axe_a11y_report.json');
+// Load axe results from JSON file and assign the first element to `results`
+const [results] = require('./public/a11y_reports/axe_a11y_report.json');
 
 console.log('Loaded axe results from JSON file', results);
 
