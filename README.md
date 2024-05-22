@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# Accessibility Testing CI/CD Demo with Axe, Lighthouse, and Pa11y
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This demo repository showcases the implementation of Continuous Integration/Continuous Deployment (CI/CD) pipelines with accessibility testing using Axe, Lighthouse, and Pa11y in GitHub Actions. The core idea for this project was inspired by SomeAnticsDev's a11y-github-actions, and we have extended it by adding the capability to retrieve the results of the tests as artifacts.
 
-## Available Scripts
+## About the Project
 
-In the project directory, you can run:
+In this project, we have set up CI/CD pipelines that automatically run accessibility tests on every pull request or push to the main branch. These tests help identify accessibility defects early in the development process, making them easier and less costly to fix. The tools we use for these tests include:
 
-### `npm start`
+### Axe:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+An accessibility testing tool that checks for violations according to the Web Content Accessibility Guidelines (WCAG) and provides specific suggestions on how to fix them.
+![log showing how axe report accessibility issues with the logs of github actions](public/axe_logs.png "Axe logs")
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Lighthouse: 
 
-### `npm test`
+Google's open-source tool for improving the quality of web pages. It offers audits for performance, accessibility, progressive web apps, SEO and more.
+![log showing how Lighthouse report accessibility issues with the logs of github actions](public/lighthouse%20_logs.png "Lighthouse logs")
+![image of Lighthouse accessibility report saved as artifact ](public/lighthouse_a11y_report.png "Lighthouse report saved as artifact")
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Pa11y:
 
-### `npm run build`
+A command-line tool for automating accessibility testing of websites. It produces detailed and developer-friendly reports.
+![log showing how Pa11y report accessibility issues with the logs of github actions](public/pally_logs.png "Pa11y logs")
+![image of Pa11y accessibility report saved as artifact ](public/pally_a11y_report.png"Pa11y report saved as artifact")
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Advantages
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Early Detection of Accessibility Issues:** Integrating accessibility testing into our CI/CD pipeline allows us to detect and fix accessibility issues early in the development cycle.
 
-### `npm run eject`
+**Enhanced Web Accessibility:** The tools we use check our code against established WCAG standards, aiding us in creating more accessible websites.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Improved User Experience:** By adhering to WCAG standards, we ensure a better experience for all users, including those with disabilities.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Regulatory Compliance:** Many jurisdictions require websites to meet WCAG 2.1 standards. Our pipelines help ensure compliance with these regulations.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Usage
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To use these workflows, you need to have a GitHub Actions workflow file in your repository under .github/workflows. You can then configure this workflow file to run Axe, Lighthouse, and Pa11y tests.
 
-## Learn More
+The workflows will run automatically when you make a pull request or push changes to the main branch. Any accessibility issues found will be annotated in the GitHub Actions output, and HTML reports will be generated and uploaded as artifacts.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Ensure to review these reports and fix any issues found to make your application accessible to all users.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Conclusion
 
-### Code Splitting
+By incorporating accessibility testing into our CI/CD pipelines, we can proactively create websites that are usable by everyone. This approach aligns with our commitment to inclusivity and our aim to provide a superior user experience for all users.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Acknowledgement
 
-### Analyzing the Bundle Size
+This project was inspired by SomeAnticsDev's a11y-github-actions. We are grateful for the foundation they provided and hope our enhancements offer additional value to those interested in accessibility testing within their CI/CD pipelines.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
