@@ -12,7 +12,14 @@ jobs:
 # Start the server and wait for it to be ready
     - name: Start server
       run: npm run start:ci
+    - run: mkdir -p ${{ github.workspace }}/tmp/artifacts
     - name: Lighthouse
       uses: foo-software/lighthouse-check-action@master
       with:
+        outputDirectory: ${{ github.workspace }}/tmp/artifacts
         urls: 'http://localhost:5000'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
+      with:
+          name: Lighthouse reports
+          path: ${{ github.workspace }}/tmp/artifacts
