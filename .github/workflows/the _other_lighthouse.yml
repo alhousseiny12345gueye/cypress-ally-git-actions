@@ -9,6 +9,11 @@ jobs:
     - run: npm install
     - name: Build
       run: npm run build --if-present
+# Start the server and wait for it to be ready
+    - name: Start server
+      run: |
+         npm start &
+         npx wait-on http://localhost:3000
     - name: Lighthouse
       uses: foo-software/lighthouse-check-action@master
       with:
