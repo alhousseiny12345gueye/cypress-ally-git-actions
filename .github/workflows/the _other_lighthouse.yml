@@ -1,25 +1,58 @@
 name: Lighthouse
+
 on: [push]
 
 jobs:
   lighthouse:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - run: npm install
-    - name: Build
-      run: npm run build --if-present
-# Start the server and wait for it to be ready
-    - name: Start server
-      run: npm run start:ci
-    - run: mkdir -p ${{ github.workspace }}/tmp/artifacts
-    - name: Lighthouse
-      uses: foo-software/lighthouse-check-action@master
-      with:
-        outputDirectory: ${{ github.workspace }}/tmp/artifacts
-        urls: 'http://localhost:5000'
-    - name: Upload artifacts
-      uses: actions/upload-artifact@master
-      with:
+      # Checks-out your repository under $GITHUB_WORKSPACE
+      - name: Checkout code
+        uses: actions/checkout@master
+
+      # Install the project dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Build the project if a build script is present
+      - name: Build
+        run: npm run build --if-present
+
+      # Start the server and wait for it to be ready
+      - name: Start server
+        run: npm run start:ci
+        # npm run start:ci starts the server and waits for it to be ready
+        # This script is defined in package.json
+
+      # Create a directory for the Lighthouse reports
+      - name: Create directory for Lighthouse reports
+        run: mkdir -p ${{ github.workspace }}/tmp/artifacts
+
+      # Run Lighthouse tests
+      - name: Run Lighthouse
+        uses: foo-software/lighthouse-check-action@master
+        id: lighthouseCheck
+        with:
+          outputDirectory: ${{ github.workspace }}/tmp/artifacts
+          urls: 'http://localhost:5000'
+        # The Lighthouse action runs Lighthouse tests on the provided URL(s)
+        # It then saves the reports in the specified output directory
+
+      # Archive the Lighthouse reports as an artifact
+      - name: Upload Lighthouse reports as workflow artifacts
+        uses: actions/upload-artifact@master
+        with:
           name: Lighthouse reports
           path: ${{ github.workspace }}/tmp/artifacts
+        # This step uploads the Lighthouse reports as an artifact of the workflow
+        # This allows you to download the reports from the GitHub Actions tab in your repository
+      - name: Verify Lighthouse Check results
+        uses: foo-software/lighthouse-check-status-action@master
+        with:
+          lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
+          minAccessibilityScore: "90"
+          minBestPracticesScore: "50"
+          minPerformanceScore: "50"
+          minProgressiveWebAppScore: "50"
+          minSeoScore: "50"
