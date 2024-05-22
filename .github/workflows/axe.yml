@@ -3,10 +3,10 @@ name: axe
 
 # Events that trigger the workflow
 on: 
-  push:
-    branches: [main]
+#  push:
+#    branches: [main]
   pull_request:
-    branches: [main]
+#    branches: [main]
 
 # The jobs of the workflow   
 jobs:
