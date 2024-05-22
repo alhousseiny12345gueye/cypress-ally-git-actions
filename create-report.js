@@ -6,7 +6,7 @@ console.log('Modules imported successfully');
 // Load axe results from JSON file and assign the first element to `results`
 const [results] = require('./public/a11y_reports/axe_a11y_report.json');
 
-console.log('Loaded axe results from JSON file', results);
+console.log('Loaded axe results from JSON file');
 
 // Generate HTML report using axe-html-reporter
 const html = createHtmlReport({
@@ -18,7 +18,7 @@ const html = createHtmlReport({
   },
 });
 
-console.log('Generated HTML report', html);
+console.log('Generated HTML report');
 
 // Write HTML report to file
 writeFileSync('./public/a11y_reports/axe_a11y_report.html', html);
