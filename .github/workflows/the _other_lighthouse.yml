@@ -56,3 +56,5 @@ jobs:
           minPerformanceScore: "50"
           minProgressiveWebAppScore: "50"
           minSeoScore: "50"
+        # This allows to set minimun treshould to pass a job. It is to use cautiosly as it its not really
+        # the greatest indicator of how accessible the webpage is. But it help us regulate terrible score passing as well
