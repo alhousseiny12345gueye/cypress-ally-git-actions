@@ -18,5 +18,5 @@ jobs:
           wait-on: "http://localhost:3000"
           record: true
           env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_RECORD_KEY: 3e425fe3-112b-40c9-87b9-c59895b1862d
           # pass GitHub token to allow accurately detecting a build vs a re-run build
