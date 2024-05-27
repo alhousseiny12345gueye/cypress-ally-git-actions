@@ -1,6 +1,8 @@
 name: the other Lighthouse
 
-on: [push]
+on: 
+  push:
+     #   branches: [main, github-actions-cypress-tests ]
 
 jobs:
   lighthouse:

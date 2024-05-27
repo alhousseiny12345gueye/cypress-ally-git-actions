@@ -1,7 +1,7 @@
 name: pa11y
 on:
   push:
-    branches: [main, github-actions-cypress-tests ]
+ #   branches: [main, github-actions-cypress-tests ]
 jobs:
   pa11y:
     runs-on: ubuntu-latest
