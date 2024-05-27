@@ -3,8 +3,8 @@ name: axe
 
 # Events that trigger the workflow
 on: 
-#  push:
-#    branches: [main]
+  push:
+    branches: [main, github-actions-cypress-tests ]
   pull_request:
 #    branches: [main]
 

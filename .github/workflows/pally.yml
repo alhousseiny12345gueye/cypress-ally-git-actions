@@ -1,7 +1,7 @@
 name: pa11y
 on:
   workflow_run:
-#    workflows: ["axe"]
+    workflows: ["axe"]
     types: 
       - completed
 jobs:
