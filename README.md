@@ -17,6 +17,13 @@ Google's open-source tool for improving the quality of web pages. It offers audi
 ![log showing how Lighthouse report accessibility issues with the logs of github actions](public/lighthouse%20_logs.png "Lighthouse logs")
 ![image of Lighthouse accessibility report saved as artifact ](public/lighthouse_a11y_report.png "Lighthouse report saved as artifact")
 
+### Another version of lighhouse worflow:
+
+We set another lighhouse workflow 'foo-software/lighthouse-check-action' instead of  Lighthouse CI CLI (lhci) and we ensure that it enforce a certain thresholds to pass the job.
+![log showing how Lighthouse report accessibility issues with the logs of github actions](public/the_other_lighthouse_logs1.png "Lighthouse logs")
+![log showing how Lighthouse report accessibility issues with the logs of github actions](public/the_other_lighthouse_logs2.png "Lighthouse logs with failed workflow due to failure to ensure the set treshold to pass")
+![image of the code ](public/the_other_lighthouse_setting.png "wokflow")
+
 ### Pa11y:
 
 A command-line tool for automating accessibility testing of websites. It produces detailed and developer-friendly reports.
