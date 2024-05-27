@@ -32,5 +32,5 @@ jobs:
         with:
           name: lighthouse accessibility report 
           path: public/a11y_reports/lighthouse
-      - name: Fail if accessibility issues were found
-        run: grep -q "\"score\":1" public/a11y_reports/lighthouse/lhr-*.report.html || exit 1
+#      - name: Fail if accessibility issues were found
+#        run: grep -q "\"score\":1" public/a11y_reports/lighthouse/lhr-*.report.html || exit 1

@@ -1,9 +1,7 @@
 name: pa11y
 on:
-  workflow_run:
-    workflows: ["axe"]
-    types: 
-      - completed
+  push:
+    branches: [main, github-actions-cypress-tests ]
 jobs:
   pa11y:
     runs-on: ubuntu-latest
