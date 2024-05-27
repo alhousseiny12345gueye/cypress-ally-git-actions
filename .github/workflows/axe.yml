@@ -44,9 +44,9 @@ jobs:
             npm start &
             npx wait-on http://localhost:3000
           fi
-          # Run the Axe tests
+          # Run the Axe tests and save the log
           echo 'Running axe'
-          axe http://localhost:3000 --dir public/a11y_reports --save axe_a11y_report.json
+          axe http://localhost:3000 --dir public/a11y_reports --save axe_a11y_report.json > axe.log
           # Stop the server
           echo 'Stopping server'
           pkill -f "react-scripts start"
@@ -65,4 +65,4 @@ jobs:
           path: public/a11y_reports/axe_a11y_report.html
       # Fail the job if any accessibility issues were found
       - name: Fail if accessibility issues were found
-        run: grep -q "0 violations found" public/a11y_reports/axe_a11y_report.html || exit 1
+        run: grep -q "0 violations found" axe.log || exit 1
