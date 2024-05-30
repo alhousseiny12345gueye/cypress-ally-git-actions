@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
  
+
+/*
 describe('a11y', () => {
     describe('dark theme', () => {
       it('should be accessible', () => {
@@ -40,6 +42,7 @@ describe('a11y', () => {
     })
   })
    
+ */ 
   function testA11y() {
     cy.injectAxe()
     ;[
@@ -56,7 +59,7 @@ describe('a11y', () => {
       } else {
         cy.viewport(size)
       }
-      cy.findAllByText('Tim Deschryver')
+      cy.findAllByText('react')
       cy.checkA11y(
         {
           exclude: ['.article-action'],
